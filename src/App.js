@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
   state = {
-    value: '',
+    text: "",
   };
 
-  handleChange = event => {
-    this.setState({ value: event.target.value });
+  handleInput = (updatedText) => {
+    this.setState(() => ({
+      text: updatedText,
+    }));
   };
 
   render() {
+    const { text } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -20,13 +23,13 @@ class App extends Component {
         </header>
         <div className="container">
           <input
+            onChange={(event) => this.handleInput(event.target.value)}
             type="text"
+            value={text}
             placeholder="Say Something"
-            value={this.state.value}
-            onChange={this.handleChange}
           />
-          <p className="echo">Echo:</p>
-          <p>{this.state.value}</p>
+          <p className="echo">Echo:{text}</p>
+          <p>This should mirror the text you typed into the input field.</p>
         </div>
       </div>
     );
